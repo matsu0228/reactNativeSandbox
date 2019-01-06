@@ -9,61 +9,38 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or pre:wss menu button for dev menu',
-});
 
-type Props = {};
-export default class App extends Component<Props> {
-  state = {
-message :"default message"
-  };
+export default class App extends Component{
   render() {
     return (
       <View style={styles.container}>
-      <HelloWorld message={this.state.message} />
-        <Text style={styles.hello}> Hellow world!!
-        </Text>
-        <Text style={styles.welcome} 
-        onPress={() => this.setState({message:'onPress'})}
-        >
-        {this.state.message}
-        
-        </Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <View style={styles.box1} />
+        <View style={styles.box2} />
+        <View style={styles.box3} />
       </View>
     );
   }
 }
 
-class HelloWorld extends Component{
-  render(){
-    return (
-
-        <Text style={styles.welcome}>Hello Component: {this.props.message}
-        </Text>
-    )
-  }
-}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    //flexDirection: 'row',
+    flexDirection: 'column',
+    //-reverse',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  box1:{
+    height:100,
+    backgroundColor: '#000',
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  box2:{
+    flex:1,
+    height:100,
+    backgroundColor: '#333',
+  },
+  box3:{
+    flex:1,
+    height:100,
+    backgroundColor: '#666',
   },
 });

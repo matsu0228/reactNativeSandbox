@@ -5,4 +5,4 @@
 react-native run-ios 
 ```
 
-* flex rayout: https://developer.mozilla.org/ja/docs/Web/CSS/align-content
+* flex rayout: https://facebook.github.io/react-native/docs/components-and-apis
