@@ -14,7 +14,8 @@ import {
   View,
   TextInput,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import Todolist from './Todolist';
 
@@ -25,7 +26,12 @@ export default class App extends Component {
     todos: [],
   }
 
-  onChangeText(newTodo){
+  constructor(props){
+    super(props);
+    this.loadTodos();
+  }
+
+  onChangeText(newTodo) {
     this.setState({ newTodo });
   }
 
@@ -34,14 +40,28 @@ export default class App extends Component {
     this.setState({
       newTodo: '',
       todos: [newTodo, ...this.state.todos],
-    });
+    }, () => this.storeTodos());
   }
 
   onPressDelete(index) {
     this.setState({
       todos: this.state.todos.filter((t, i) => i != index),
-    });
+    }, () => this.storeTodos());
   }
+
+  storeTodos() {
+    const str = JSON.stringify(this.state.todos);
+    console.log("storeTodos(): "+str);
+    AsyncStorage.setItem('todos', str);
+  }
+  loadTodos(){
+    AsyncStorage.getItem('todos').then((str) => {
+      const todos = str ? JSON.parse(str) : [];
+      console.log("loadTodos(): " + str);
+      this.setState({ todos });
+    })
+  }
+
   render() {
     console.log(this.state);
     return (
